@@ -19,8 +19,6 @@ export function createComponent(component: ComponentFunction, props: Props, ctx:
 }
 
 export function clientSideRender(component: Component, n: HTMLElement, ctx: Ctx) {
-    console.log("for some reason still client side rendering")
-    console.log(typeof component)
     if (!ctx.isServer) {
         n.innerHTML = component
     } else {
