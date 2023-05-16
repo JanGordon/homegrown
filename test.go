@@ -1,3 +1,4 @@
+// this is a simple test for homegrown and uses the assets stored in ./test/
 package main
 
 import (
@@ -6,7 +7,6 @@ import (
 
 	"github.com/JanGordon/homegrown/api"
 	"github.com/andybalholm/brotli"
-
 	"rogchap.com/v8go"
 )
 
