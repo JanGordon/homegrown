@@ -1,4 +1,4 @@
-import * as hg from "../frontend/"
+import * as hg from "../js"
 import {Button} from "./Button"
 import {Profile} from "./Profile"
 

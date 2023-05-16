@@ -1,5 +1,5 @@
 
-import * as homegrown from "../frontend/"
+import * as homegrown from "../js"
 
 
 export var Profile = (props: homegrown.Props, ctx: homegrown.Ctx) => {
