@@ -36,6 +36,7 @@ func BuildSSR(ctx *RenderCtx) {
 		MinifySyntax:      true,
 		MinifyWhitespace:  true,
 		MinifyIdentifiers: false,
+		Platform:          esbuild.PlatformNode,
 	})
 	if len(result.Errors) != 0 {
 		fmt.Println("error: ", result.Errors)
@@ -60,6 +61,7 @@ func BuildClient(path string) []byte {
 		MinifySyntax:      true,
 		MinifyWhitespace:  true,
 		MinifyIdentifiers: true,
+		Platform:          esbuild.PlatformBrowser,
 	})
 	if len(result.Errors) != 0 {
 		fmt.Println("error: ", result.Errors)
