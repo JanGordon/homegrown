@@ -33,17 +33,17 @@ func BuildSSR(ctx *RenderCtx) {
 	result := esbuild.Build(esbuild.BuildOptions{
 		EntryPoints:       []string{ctx.Script},
 		Bundle:            true,
-		MinifySyntax:      true,
+		MinifySyntax:      false,
 		MinifyWhitespace:  true,
 		MinifyIdentifiers: false,
-		Platform:          esbuild.PlatformNode,
+		Platform:          esbuild.PlatformDefault,
 	})
 	if len(result.Errors) != 0 {
 		fmt.Println("error: ", result.Errors)
 		os.Exit(1)
 	}
 	c := strings.Replace(string(result.OutputFiles[0].Contents), "(()=>{", "", 1)
-	ctx.buildCache = reverse(strings.Replace(reverse(c[:len(c)-6]), reverse(`console.log(ssr(new Map([["",""]])));`), "", 1))
+	ctx.buildCache = reverse(strings.Replace(reverse(c[:len(c)-6]), reverse(`console.log(ssr(new Map([["",""]`), "", 1))
 	_, err := ctx.V8Ctx.RunScript(string(ctx.buildCache), "build.js")
 	if err != nil {
 		fmt.Println(string(ctx.buildCache))
@@ -58,9 +58,10 @@ func BuildClient(path string) []byte {
 	result := esbuild.Build(esbuild.BuildOptions{
 		EntryPoints:       []string{path},
 		Bundle:            true,
-		MinifySyntax:      true,
-		MinifyWhitespace:  true,
-		MinifyIdentifiers: true,
+		MinifySyntax:      false,
+		MinifyWhitespace:  false,
+		MinifyIdentifiers: false,
+		Target:            esbuild.ES2020,
 		Platform:          esbuild.PlatformBrowser,
 	})
 	if len(result.Errors) != 0 {
