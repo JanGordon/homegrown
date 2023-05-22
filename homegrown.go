@@ -78,14 +78,15 @@ func SSR(ctx *RenderCtx, props [][2]string) []byte {
 		panic(err)
 	}
 
-	_, err = ctx.V8Ctx.RunScript(fmt.Sprintf("var n = ssr(new Map(%v))", string(propBytes)), "ssr.js")
+	val, err := ctx.V8Ctx.RunScript(fmt.Sprintf("ssr(new Map(%v))", string(propBytes)), "ssr.js")
 	if err != nil {
 		fmt.Println(string(ctx.buildCache))
 		panic(err)
 	}
-	val, err := ctx.V8Ctx.RunScript("n", "val.js")
+	p, err := val.AsPromise()
 	if err != nil {
 		panic(err)
 	}
-	return []byte(val.String())
+
+	return []byte(p.Result().String())
 }
