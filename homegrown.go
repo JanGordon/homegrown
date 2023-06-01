@@ -10,10 +10,6 @@ import (
 	"rogchap.com/v8go"
 )
 
-// to implement
-// for now you can copy functions from main they should be straightforward enough to understand
-// if not, please open an issue
-
 type RenderCtx struct {
 	// context required for building and ssring a single page
 	Script     string
@@ -53,7 +49,7 @@ func BuildSSR(ctx *RenderCtx) {
 }
 
 func BuildClient(path string) []byte {
-	// this simply builds the js fil inputed and returns the contents of the output file
+	// this simply builds the js file inputed and returns the contents of the output file
 	// used to build client but can also be used to build any file
 	result := esbuild.Build(esbuild.BuildOptions{
 		EntryPoints:       []string{path},
