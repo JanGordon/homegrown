@@ -58,6 +58,12 @@ export async function hydrate(component: HydrateableFunction, element: HTMLEleme
     // we need to do difffing to ensure there is no perfoance problems
 }
 
+export function updateNode(oldNodeSelector: string, newNodeString: string) {
+    var newNode = document.createElement("div")
+    newNode.innerHTML = newNodeString
+    document.querySelector(oldNodeSelector)!.innerHTML = newNode.firstElementChild!.innerHTML
+}
+
 export async function hydr(serverHTML: string | Promise<string>, clientHTML: string | Promise<string>, name: string, ctx: Ctx) {
     // ctx.nodeId = 0
     if (ctx.isServer) {
